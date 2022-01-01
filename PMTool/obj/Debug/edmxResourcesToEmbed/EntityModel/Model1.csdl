@@ -1,0 +1,400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PMTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Activity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_Task" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="FK_Status" Type="Int32" Nullable="false" />
+    <Property Name="Attachment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Budget" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Progress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FK_Priority" Type="Int32" />
+    <Property Name="AssignMembers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="Longitude" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Latitude" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Radius" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Priority" Relationship="Self.FK_Activity_Priority" FromRole="Activity" ToRole="Priority" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_Activity_Status" FromRole="Activity" ToRole="Status" />
+    <NavigationProperty Name="Task" Relationship="Self.FK_Activity_Task" FromRole="Activity" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="DependentTask">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_DependentTask" FromRole="DependentTask" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="MileStone">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_Project" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="FK_Status" Type="Int32" />
+    <Property Name="Attachment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Budget" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Progress" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FK_Priority" Type="Int32" />
+    <Property Name="TeamMembers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Priority" Relationship="Self.FK_MileStone_Priority" FromRole="MileStone" ToRole="Priority" />
+    <NavigationProperty Name="Project" Relationship="Self.FK_MileStone_Project" FromRole="MileStone" ToRole="Project" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_MileStone_Status" FromRole="MileStone" ToRole="Status" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_MileStone" FromRole="MileStone" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="Priority">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Activities" Relationship="Self.FK_Activity_Priority" FromRole="Priority" ToRole="Activity" />
+    <NavigationProperty Name="MileStones" Relationship="Self.FK_MileStone_Priority" FromRole="Priority" ToRole="MileStone" />
+    <NavigationProperty Name="Projects" Relationship="Self.FK_Project_Priority" FromRole="Priority" ToRole="Project" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_Priority" FromRole="Priority" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="FK_ProjectOwner" Type="Int32" />
+    <Property Name="FK_Status" Type="Int32" Nullable="false" />
+    <Property Name="Attachment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Budget" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Progress" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FK_Priority" Type="Int32" />
+    <Property Name="TeamMembers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="MileStones" Relationship="Self.FK_MileStone_Project" FromRole="Project" ToRole="MileStone" />
+    <NavigationProperty Name="Priority" Relationship="Self.FK_Project_Priority" FromRole="Project" ToRole="Priority" />
+    <NavigationProperty Name="ProjectOwner" Relationship="Self.FK_Project_ProjectOwner" FromRole="Project" ToRole="ProjectOwner" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_Project_Status" FromRole="Project" ToRole="Status" />
+  </EntityType>
+  <EntityType Name="ProjectOwner">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Projects" Relationship="Self.FK_Project_ProjectOwner" FromRole="ProjectOwner" ToRole="Project" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Activities" Relationship="Self.FK_Activity_Status" FromRole="Status" ToRole="Activity" />
+    <NavigationProperty Name="MileStones" Relationship="Self.FK_MileStone_Status" FromRole="Status" ToRole="MileStone" />
+    <NavigationProperty Name="Projects" Relationship="Self.FK_Project_Status" FromRole="Status" ToRole="Project" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Task_Status" FromRole="Status" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_MileStone" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Precision="3" />
+    <Property Name="FK_Status" Type="Int32" Nullable="false" />
+    <Property Name="Attachment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Budget" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Progress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FK_Priority" Type="Int32" />
+    <Property Name="AssignMembers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="Longitude" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Latitude" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Radius" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsRequiredLatitude" Type="Boolean" />
+    <Property Name="IsDependentTask" Type="Boolean" />
+    <Property Name="FK_DependentTask" Type="Int32" />
+    <NavigationProperty Name="Activities" Relationship="Self.FK_Activity_Task" FromRole="Task" ToRole="Activity" />
+    <NavigationProperty Name="DependentTask" Relationship="Self.FK_Task_DependentTask" FromRole="Task" ToRole="DependentTask" />
+    <NavigationProperty Name="MileStone" Relationship="Self.FK_Task_MileStone" FromRole="Task" ToRole="MileStone" />
+    <NavigationProperty Name="Priority" Relationship="Self.FK_Task_Priority" FromRole="Task" ToRole="Priority" />
+    <NavigationProperty Name="Status" Relationship="Self.FK_Task_Status" FromRole="Task" ToRole="Status" />
+  </EntityType>
+  <Association Name="FK_Activity_Priority">
+    <End Role="Priority" Type="Self.Priority" Multiplicity="0..1" />
+    <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Priority">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activity">
+        <PropertyRef Name="FK_Priority" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Activity_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activity">
+        <PropertyRef Name="FK_Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Activity_Task">
+    <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+    <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activity">
+        <PropertyRef Name="FK_Task" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_DependentTask">
+    <End Role="DependentTask" Type="Self.DependentTask" Multiplicity="0..1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DependentTask">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="FK_DependentTask" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MileStone_Priority">
+    <End Role="Priority" Type="Self.Priority" Multiplicity="0..1" />
+    <End Role="MileStone" Type="Self.MileStone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Priority">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MileStone">
+        <PropertyRef Name="FK_Priority" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MileStone_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+    <End Role="MileStone" Type="Self.MileStone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MileStone">
+        <PropertyRef Name="FK_Project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MileStone_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+    <End Role="MileStone" Type="Self.MileStone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MileStone">
+        <PropertyRef Name="FK_Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_MileStone">
+    <End Role="MileStone" Type="Self.MileStone" Multiplicity="0..1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MileStone">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="FK_MileStone" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_Priority">
+    <End Role="Priority" Type="Self.Priority" Multiplicity="0..1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Priority">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="FK_Priority" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_Priority">
+    <End Role="Priority" Type="Self.Priority" Multiplicity="0..1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Priority">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="FK_Priority" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_ProjectOwner">
+    <End Role="ProjectOwner" Type="Self.ProjectOwner" Multiplicity="0..1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProjectOwner">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="FK_ProjectOwner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Project_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Project" Type="Self.Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Project">
+        <PropertyRef Name="FK_Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="FK_Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PMTEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Activities" EntityType="Self.Activity" />
+    <EntitySet Name="DependentTasks" EntityType="Self.DependentTask" />
+    <EntitySet Name="MileStones" EntityType="Self.MileStone" />
+    <EntitySet Name="Priorities" EntityType="Self.Priority" />
+    <EntitySet Name="Projects" EntityType="Self.Project" />
+    <EntitySet Name="ProjectOwners" EntityType="Self.ProjectOwner" />
+    <EntitySet Name="Status" EntityType="Self.Status" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Tasks" EntityType="Self.Task" />
+    <AssociationSet Name="FK_Activity_Priority" Association="Self.FK_Activity_Priority">
+      <End Role="Priority" EntitySet="Priorities" />
+      <End Role="Activity" EntitySet="Activities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Activity_Status" Association="Self.FK_Activity_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Activity" EntitySet="Activities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Activity_Task" Association="Self.FK_Activity_Task">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="Activity" EntitySet="Activities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_DependentTask" Association="Self.FK_Task_DependentTask">
+      <End Role="DependentTask" EntitySet="DependentTasks" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MileStone_Priority" Association="Self.FK_MileStone_Priority">
+      <End Role="Priority" EntitySet="Priorities" />
+      <End Role="MileStone" EntitySet="MileStones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MileStone_Project" Association="Self.FK_MileStone_Project">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="MileStone" EntitySet="MileStones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MileStone_Status" Association="Self.FK_MileStone_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="MileStone" EntitySet="MileStones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_MileStone" Association="Self.FK_Task_MileStone">
+      <End Role="MileStone" EntitySet="MileStones" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_Priority" Association="Self.FK_Project_Priority">
+      <End Role="Priority" EntitySet="Priorities" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_Priority" Association="Self.FK_Task_Priority">
+      <End Role="Priority" EntitySet="Priorities" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_ProjectOwner" Association="Self.FK_Project_ProjectOwner">
+      <End Role="ProjectOwner" EntitySet="ProjectOwners" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Project_Status" Association="Self.FK_Project_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Project" EntitySet="Projects" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_Status" Association="Self.FK_Task_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PMTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Activity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Task" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="ProjectOwner" Type="int" />
+    <Property Name="ActualCost" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="FK_Project" Type="int" />
+    <Property Name="FK_Milestone" Type="int" />
+    <Property Name="FK_MilestoneOwner" Type="int" />
+    <Property Name="CompletedBy" Type="int" />
+    <Property Name="CompletedOn" Type="datetime" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="Longitude" Type="nvarchar" MaxLength="500" />
+    <Property Name="Latitude" Type="nvarchar" MaxLength="500" />
+    <Property Name="FK_ProjectOwner" Type="int" />
+  </EntityType>
+  <EntityType Name="Attachment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FileType" Type="nvarchar" MaxLength="30" />
+    <Property Name="Path" Type="nvarchar" MaxLength="500" />
+    <Property Name="extention" Type="nvarchar" MaxLength="10" />
+    <Property Name="FK_Project" Type="int" />
+    <Property Name="FK_Milestone" Type="int" />
+    <Property Name="FK_Task" Type="int" />
+    <Property Name="Fk_Activity" Type="int" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Employee365">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Department" Type="nvarchar" MaxLength="100" />
+    <Property Name="Designation" Type="nvarchar" MaxLength="100" />
+    <Property Name="PhoneNo" Type="nvarchar" MaxLength="30" />
+    <Property Name="CellNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="MileStone">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FK_Project" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Budget" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Progress" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Priority" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FK_DependentOn" Type="int" />
+    <Property Name="IsDependent" Type="bit" />
+    <Property Name="CurrentlyAssignedTo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CompletedOn" Type="datetime" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="FK_ProjectOwner" Type="int" />
+  </EntityType>
+  <EntityType Name="MilestoneAssignedTo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="FK_MileStone" Type="int" />
+    <Property Name="FK_AssignedTo" Type="int" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Priority">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="FK_ProjectOwner" Type="int" />
+    <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Budget" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Progress" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Priority" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CompletedOn" Type="datetime" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="ProjectMember">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FK_Project" Type="int" />
+    <Property Name="FK_Employee365ID" Type="int" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="ProjectOwner" Type="int" />
+    <Property Name="Budget" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Progress" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Priority" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FK_Project" Type="int" />
+    <Property Name="FK_MileStone" Type="int" />
+    <Property Name="FK_MilestoneOwner" Type="int" />
+    <Property Name="FK_AssignTo" Type="nvarchar(max)" />
+    <Property Name="IsDependentTask" Type="bit" />
+    <Property Name="FK_DependentTask" Type="int" />
+    <Property Name="FK_ProjectOwner" Type="int" />
+    <Property Name="CompletedOn" Type="datetime" />
+    <Property Name="CreatedOn" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="ModifiedOn" Type="datetime" />
+    <Property Name="ModifiedBy" Type="int" />
+    <Property Name="IsActive" Type="bit" />
+    <Property Name="IsLocationRequired" Type="bit" />
+    <Property Name="Longitude" Type="nvarchar" MaxLength="500" />
+    <Property Name="Latitude" Type="nvarchar" MaxLength="500" />
+    <Property Name="Radius" Type="nvarchar" MaxLength="500" />
+    <Property Name="IsApproved" Type="bit" />
+    <Property Name="ApprovedBy" Type="int" />
+    <Property Name="ApprovedOn" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_Activity_Task">
+    <End Role="Task" Type="Self.Task" Multiplicity="1" />
+    <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activity">
+        <PropertyRef Name="FK_Task" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MileStone_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="1" />
+    <End Role="MileStone" Type="Self.MileStone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MileStone">
+        <PropertyRef Name="FK_Project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MilestoneAssignedTo_MileStone">
+    <End Role="MileStone" Type="Self.MileStone" Multiplicity="0..1" />
+    <End Role="MilestoneAssignedTo" Type="Self.MilestoneAssignedTo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MileStone">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MilestoneAssignedTo">
+        <PropertyRef Name="FK_MileStone" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectMember_Project">
+    <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+    <End Role="ProjectMember" Type="Self.ProjectMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProjectMember">
+        <PropertyRef Name="FK_Project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_MileStone">
+    <End Role="MileStone" Type="Self.MileStone" Multiplicity="0..1" />
+    <End Role="Task" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MileStone">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="FK_MileStone" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PMTModelStoreContainer">
+    <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Attachment" EntityType="Self.Attachment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employee365" EntityType="Self.Employee365" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MileStone" EntityType="Self.MileStone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MilestoneAssignedTo" EntityType="Self.MilestoneAssignedTo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Priority" EntityType="Self.Priority" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProjectMember" EntityType="Self.ProjectMember" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Activity_Task" Association="Self.FK_Activity_Task">
+      <End Role="Task" EntitySet="Task" />
+      <End Role="Activity" EntitySet="Activity" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MileStone_Project" Association="Self.FK_MileStone_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="MileStone" EntitySet="MileStone" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MilestoneAssignedTo_MileStone" Association="Self.FK_MilestoneAssignedTo_MileStone">
+      <End Role="MileStone" EntitySet="MileStone" />
+      <End Role="MilestoneAssignedTo" EntitySet="MilestoneAssignedTo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectMember_Project" Association="Self.FK_ProjectMember_Project">
+      <End Role="Project" EntitySet="Project" />
+      <End Role="ProjectMember" EntitySet="ProjectMember" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_MileStone" Association="Self.FK_Task_MileStone">
+      <End Role="MileStone" EntitySet="MileStone" />
+      <End Role="Task" EntitySet="Task" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

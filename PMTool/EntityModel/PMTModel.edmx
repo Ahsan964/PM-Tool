@@ -1,0 +1,1395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PMTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_Task" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ProjectOwner" Type="int" />
+          <Property Name="ActualCost" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FK_Project" Type="int" />
+          <Property Name="FK_Milestone" Type="int" />
+          <Property Name="FK_MilestoneOwner" Type="int" />
+          <Property Name="CompletedBy" Type="int" />
+          <Property Name="CompletedOn" Type="datetime" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Longitude" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Latitude" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FK_ProjectOwner" Type="int" />
+        </EntityType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FileType" Type="nvarchar" MaxLength="30" />
+          <Property Name="Path" Type="nvarchar" MaxLength="500" />
+          <Property Name="extention" Type="nvarchar" MaxLength="10" />
+          <Property Name="FK_Project" Type="int" />
+          <Property Name="FK_Milestone" Type="int" />
+          <Property Name="FK_Task" Type="int" />
+          <Property Name="Fk_Activity" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Employee365">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Department" Type="nvarchar" MaxLength="100" />
+          <Property Name="Designation" Type="nvarchar" MaxLength="100" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="30" />
+          <Property Name="CellNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="MileStone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FK_Project" Type="int" Nullable="false" />
+          <Property Name="FK_DependentOn" Type="int" />
+          <Property Name="FK_ProjectOwner" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Budget" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Progress" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Priority" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsDependent" Type="bit" Nullable="false" />
+          <Property Name="CurrentlyAssignedTo" Type="int" Nullable="false" />
+          <Property Name="CompletedOn" Type="datetime" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MilestoneAssignedTo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="FK_MileStone" Type="int" />
+          <Property Name="FK_AssignedTo" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Priority">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="FK_ProjectOwner" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Budget" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Progress" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Priority" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompletedOn" Type="datetime" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="UploadAttachement" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ProjectMember">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FK_Project" Type="int" />
+          <Property Name="FK_Employee365ID" Type="int" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="ProjectOwner" Type="int" />
+          <Property Name="Budget" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Progress" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Priority" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FK_Project" Type="int" />
+          <Property Name="FK_MileStone" Type="int" />
+          <Property Name="FK_MilestoneOwner" Type="int" />
+          <Property Name="FK_AssignTo" Type="int" />
+          <Property Name="IsDependentTask" Type="bit" Nullable="false" />
+          <Property Name="FK_DependentTask" Type="int" />
+          <Property Name="FK_ProjectOwner" Type="int" />
+          <Property Name="CompletedOn" Type="datetime" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsLocationRequired" Type="bit" />
+          <Property Name="Longitude" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Latitude" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Radius" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsApproved" Type="bit" />
+          <Property Name="ApprovedBy" Type="int" />
+          <Property Name="ApprovedOn" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Activity_Task">
+          <End Role="Task" Type="Self.Task" Multiplicity="1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="FK_Task" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MileStone_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="1" />
+          <End Role="MileStone" Type="Self.MileStone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MileStone">
+              <PropertyRef Name="FK_Project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MilestoneAssignedTo_MileStone">
+          <End Role="MileStone" Type="Self.MileStone" Multiplicity="0..1" />
+          <End Role="MilestoneAssignedTo" Type="Self.MilestoneAssignedTo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MileStone">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MilestoneAssignedTo">
+              <PropertyRef Name="FK_MileStone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectMember_Project">
+          <End Role="Project" Type="Self.Project" Multiplicity="0..1" />
+          <End Role="ProjectMember" Type="Self.ProjectMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectMember">
+              <PropertyRef Name="FK_Project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_MileStone">
+          <End Role="MileStone" Type="Self.MileStone" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MileStone">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="FK_MileStone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddAttachment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Path" Type="nvarchar" Mode="In" />
+          <Parameter Name="extention" Type="nvarchar" Mode="In" />
+          <Parameter Name="ProId" Type="int" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="PCreatedBy" Type="int" Mode="In" />
+          <Parameter Name="PModifiedOn" Type="datetime" Mode="In" />
+          <Parameter Name="PModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="PIsActive" Type="bit" Mode="In" />
+          <Parameter Name="ExceptionMessage" Type="nvarchar(max)" Mode="InOut" />
+          <Parameter Name="ValidateMessage" Type="nvarchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="AddProjectMember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="FK_Project" Type="int" Mode="In" />
+          <Parameter Name="FK_Employee365ID" Type="int" Mode="In" />
+          <Parameter Name="CreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="PCreatedBy" Type="int" Mode="In" />
+          <Parameter Name="PModifiedOn" Type="datetime" Mode="In" />
+          <Parameter Name="PModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="PIsActive" Type="bit" Mode="In" />
+          <Parameter Name="ExceptionMessage" Type="nvarchar(max)" Mode="InOut" />
+          <Parameter Name="ValidateMessage" Type="nvarchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="SP_AddActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ActivityName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UploadAttachement" Type="nvarchar" Mode="In" />
+          <Parameter Name="Longitude" Type="decimal" Mode="In" />
+          <Parameter Name="Latitude" Type="decimal" Mode="In" />
+          <Parameter Name="FK_Task" Type="int" Mode="In" />
+          <Parameter Name="FK_Project" Type="int" Mode="In" />
+          <Parameter Name="FK_Milestone" Type="int" Mode="In" />
+          <Parameter Name="FK_MilestoneOwner" Type="int" Mode="In" />
+          <Parameter Name="FK_ProjectOwner" Type="int" Mode="In" />
+          <Parameter Name="FK_CuurentlyAssignTo" Type="int" Mode="In" />
+          <Parameter Name="CompletedOn" Type="datetime" Mode="In" />
+          <Parameter Name="ACreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="ACreatedBy" Type="int" Mode="In" />
+          <Parameter Name="AModifiedOn" Type="datetime" Mode="In" />
+          <Parameter Name="AModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="AIsActive" Type="bit" Mode="In" />
+          <Parameter Name="ExceptionMessage" Type="nvarchar(max)" Mode="InOut" />
+          <Parameter Name="ValidateMessage" Type="nvarchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="SP_AddMilestone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FK_Project" Type="int" Mode="In" />
+          <Parameter Name="MilestoneName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UploadAttachement" Type="nvarchar" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="Budget" Type="decimal" Mode="In" />
+          <Parameter Name="Progress" Type="decimal" Mode="In" />
+          <Parameter Name="Priority" Type="nvarchar" Mode="In" />
+          <Parameter Name="FK_DependentOn" Type="int" Mode="In" />
+          <Parameter Name="IsDependent" Type="bit" Mode="In" />
+          <Parameter Name="FK_ProjectOwner" Type="int" Mode="In" />
+          <Parameter Name="FK_CuurentlyAssignTo" Type="int" Mode="In" />
+          <Parameter Name="CompletedOn" Type="datetime" Mode="In" />
+          <Parameter Name="MCreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="MCreatedBy" Type="int" Mode="In" />
+          <Parameter Name="MModifiedOn" Type="datetime" Mode="In" />
+          <Parameter Name="MModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="MIsActive" Type="bit" Mode="In" />
+          <Parameter Name="ExceptionMessage" Type="nvarchar(max)" Mode="InOut" />
+          <Parameter Name="ValidateMessage" Type="nvarchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="SP_AddProject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="projectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UploadAttachement" Type="nvarchar" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="FK_ProjectOwner" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="Budget" Type="decimal" Mode="In" />
+          <Parameter Name="Progress" Type="decimal" Mode="In" />
+          <Parameter Name="Priority" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompletedOn" Type="datetime" Mode="In" />
+          <Parameter Name="PCreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="PCreatedBy" Type="int" Mode="In" />
+          <Parameter Name="PModifiedOn" Type="datetime" Mode="In" />
+          <Parameter Name="PModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="PIsActive" Type="bit" Mode="In" />
+          <Parameter Name="ExceptionMessage" Type="nvarchar(max)" Mode="InOut" />
+          <Parameter Name="ValidateMessage" Type="nvarchar(max)" Mode="InOut" />
+          <Parameter Name="proId" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="SP_AddTask" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FK_Project" Type="int" Mode="In" />
+          <Parameter Name="FK_Milestone" Type="int" Mode="In" />
+          <Parameter Name="TaskName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UploadAttachement" Type="nvarchar" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="Budget" Type="decimal" Mode="In" />
+          <Parameter Name="Progress" Type="decimal" Mode="In" />
+          <Parameter Name="Priority" Type="nvarchar" Mode="In" />
+          <Parameter Name="Longitude" Type="decimal" Mode="In" />
+          <Parameter Name="Latitude" Type="decimal" Mode="In" />
+          <Parameter Name="Radius" Type="decimal" Mode="In" />
+          <Parameter Name="FK_DependentOn" Type="int" Mode="In" />
+          <Parameter Name="IsDependent" Type="bit" Mode="In" />
+          <Parameter Name="FK_ProjectOwner" Type="int" Mode="In" />
+          <Parameter Name="FK_CuurentlyAssignTo" Type="int" Mode="In" />
+          <Parameter Name="CompletedOn" Type="datetime" Mode="In" />
+          <Parameter Name="TCreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="TCreatedBy" Type="int" Mode="In" />
+          <Parameter Name="TModifiedOn" Type="datetime" Mode="In" />
+          <Parameter Name="TModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="TIsActive" Type="bit" Mode="In" />
+          <Parameter Name="ExceptionMessage" Type="nvarchar(max)" Mode="InOut" />
+          <Parameter Name="ValidateMessage" Type="nvarchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_EditActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="ActivityName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UploadAttachement" Type="nvarchar" Mode="In" />
+          <Parameter Name="Longitude" Type="decimal" Mode="In" />
+          <Parameter Name="Latitude" Type="decimal" Mode="In" />
+          <Parameter Name="FK_Task" Type="int" Mode="In" />
+          <Parameter Name="FK_Project" Type="int" Mode="In" />
+          <Parameter Name="FK_Milestone" Type="int" Mode="In" />
+          <Parameter Name="FK_MilestoneOwner" Type="int" Mode="In" />
+          <Parameter Name="FK_ProjectOwner" Type="int" Mode="In" />
+          <Parameter Name="FK_CuurentlyAssignTo" Type="int" Mode="In" />
+          <Parameter Name="CompletedOn" Type="datetime" Mode="In" />
+          <Parameter Name="ACreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="ACreatedBy" Type="int" Mode="In" />
+          <Parameter Name="AModifiedOn" Type="datetime" Mode="In" />
+          <Parameter Name="AModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="AIsActive" Type="bit" Mode="In" />
+          <Parameter Name="ExceptionMessage" Type="nvarchar(max)" Mode="InOut" />
+          <Parameter Name="ValidateMessage" Type="nvarchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="SP_EditMilestone" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="FK_Project" Type="int" Mode="In" />
+          <Parameter Name="MilestoneName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UploadAttachement" Type="nvarchar" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="Budget" Type="decimal" Mode="In" />
+          <Parameter Name="Progress" Type="decimal" Mode="In" />
+          <Parameter Name="Priority" Type="nvarchar" Mode="In" />
+          <Parameter Name="FK_DependentOn" Type="int" Mode="In" />
+          <Parameter Name="IsDependent" Type="bit" Mode="In" />
+          <Parameter Name="FK_ProjectOwner" Type="int" Mode="In" />
+          <Parameter Name="FK_CuurentlyAssignTo" Type="int" Mode="In" />
+          <Parameter Name="CompletedOn" Type="datetime" Mode="In" />
+          <Parameter Name="MCreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="MCreatedBy" Type="int" Mode="In" />
+          <Parameter Name="MModifiedOn" Type="datetime" Mode="In" />
+          <Parameter Name="MModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="MIsActive" Type="bit" Mode="In" />
+          <Parameter Name="ExceptionMessage" Type="nvarchar(max)" Mode="InOut" />
+          <Parameter Name="ValidateMessage" Type="nvarchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="SP_EditProject" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="projectId" Type="int" Mode="In" />
+          <Parameter Name="projectName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UploadAttachement" Type="nvarchar" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="FK_ProjectOwner" Type="int" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="Budget" Type="decimal" Mode="In" />
+          <Parameter Name="Progress" Type="decimal" Mode="In" />
+          <Parameter Name="Priority" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompletedOn" Type="datetime" Mode="In" />
+          <Parameter Name="PCreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="PCreatedBy" Type="int" Mode="In" />
+          <Parameter Name="PModifiedOn" Type="datetime" Mode="In" />
+          <Parameter Name="PModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="PIsActive" Type="bit" Mode="In" />
+          <Parameter Name="ExceptionMessage" Type="nvarchar(max)" Mode="InOut" />
+          <Parameter Name="ValidateMessage" Type="nvarchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="SP_EditTask" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="FK_Project" Type="int" Mode="In" />
+          <Parameter Name="FK_Milestone" Type="int" Mode="In" />
+          <Parameter Name="TaskName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Description" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UploadAttachement" Type="nvarchar" Mode="In" />
+          <Parameter Name="StartDate" Type="datetime" Mode="In" />
+          <Parameter Name="EndDate" Type="datetime" Mode="In" />
+          <Parameter Name="Status" Type="nvarchar" Mode="In" />
+          <Parameter Name="Budget" Type="decimal" Mode="In" />
+          <Parameter Name="Progress" Type="decimal" Mode="In" />
+          <Parameter Name="Priority" Type="nvarchar" Mode="In" />
+          <Parameter Name="Longitude" Type="decimal" Mode="In" />
+          <Parameter Name="Latitude" Type="decimal" Mode="In" />
+          <Parameter Name="Radius" Type="decimal" Mode="In" />
+          <Parameter Name="FK_DependentOn" Type="int" Mode="In" />
+          <Parameter Name="IsDependent" Type="bit" Mode="In" />
+          <Parameter Name="FK_ProjectOwner" Type="int" Mode="In" />
+          <Parameter Name="FK_CuurentlyAssignTo" Type="int" Mode="In" />
+          <Parameter Name="CompletedOn" Type="datetime" Mode="In" />
+          <Parameter Name="TCreatedOn" Type="datetime" Mode="In" />
+          <Parameter Name="TCreatedBy" Type="int" Mode="In" />
+          <Parameter Name="TModifiedOn" Type="datetime" Mode="In" />
+          <Parameter Name="TModifiedBy" Type="int" Mode="In" />
+          <Parameter Name="TIsActive" Type="bit" Mode="In" />
+          <Parameter Name="ExceptionMessage" Type="nvarchar(max)" Mode="InOut" />
+          <Parameter Name="ValidateMessage" Type="nvarchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="PMTModelStoreContainer">
+          <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attachment" EntityType="Self.Attachment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee365" EntityType="Self.Employee365" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MileStone" EntityType="Self.MileStone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MilestoneAssignedTo" EntityType="Self.MilestoneAssignedTo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Priority" EntityType="Self.Priority" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectMember" EntityType="Self.ProjectMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Activity_Task" Association="Self.FK_Activity_Task">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MileStone_Project" Association="Self.FK_MileStone_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="MileStone" EntitySet="MileStone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MilestoneAssignedTo_MileStone" Association="Self.FK_MilestoneAssignedTo_MileStone">
+            <End Role="MileStone" EntitySet="MileStone" />
+            <End Role="MilestoneAssignedTo" EntitySet="MilestoneAssignedTo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectMember_Project" Association="Self.FK_ProjectMember_Project">
+            <End Role="Project" EntitySet="Project" />
+            <End Role="ProjectMember" EntitySet="ProjectMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_MileStone" Association="Self.FK_Task_MileStone">
+            <End Role="MileStone" EntitySet="MileStone" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PMTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PMTEntities2" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="SP_AddProject">
+            <Parameter Name="projectName" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="UploadAttachement" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="FK_ProjectOwner" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Budget" Mode="In" Type="Decimal" />
+            <Parameter Name="Progress" Mode="In" Type="Decimal" />
+            <Parameter Name="Priority" Mode="In" Type="String" />
+            <Parameter Name="CompletedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="PCreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="PCreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="PModifiedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="PModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="PIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="ExceptionMessage" Mode="InOut" Type="String" />
+            <Parameter Name="ValidateMessage" Mode="InOut" Type="String" />
+            <Parameter Name="proId" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_EditProject">
+            <Parameter Name="projectId" Mode="In" Type="Int32" />
+            <Parameter Name="projectName" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="UploadAttachement" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="FK_ProjectOwner" Mode="In" Type="Int32" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Budget" Mode="In" Type="Decimal" />
+            <Parameter Name="Progress" Mode="In" Type="Decimal" />
+            <Parameter Name="Priority" Mode="In" Type="String" />
+            <Parameter Name="CompletedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="PCreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="PCreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="PModifiedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="PModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="PIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="ExceptionMessage" Mode="InOut" Type="String" />
+            <Parameter Name="ValidateMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_AddActivity">
+            <Parameter Name="ActivityName" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="UploadAttachement" Mode="In" Type="String" />
+            <Parameter Name="Longitude" Mode="In" Type="Decimal" />
+            <Parameter Name="Latitude" Mode="In" Type="Decimal" />
+            <Parameter Name="FK_Task" Mode="In" Type="Int32" />
+            <Parameter Name="FK_Project" Mode="In" Type="Int32" />
+            <Parameter Name="FK_Milestone" Mode="In" Type="Int32" />
+            <Parameter Name="FK_MilestoneOwner" Mode="In" Type="Int32" />
+            <Parameter Name="FK_ProjectOwner" Mode="In" Type="Int32" />
+            <Parameter Name="FK_CuurentlyAssignTo" Mode="In" Type="Int32" />
+            <Parameter Name="CompletedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="ACreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="ACreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="AModifiedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="AModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="AIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="ExceptionMessage" Mode="InOut" Type="String" />
+            <Parameter Name="ValidateMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_AddMilestone" ReturnType="Collection(Int32)">
+            <Parameter Name="FK_Project" Mode="In" Type="Int32" />
+            <Parameter Name="MilestoneName" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="UploadAttachement" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Budget" Mode="In" Type="Decimal" />
+            <Parameter Name="Progress" Mode="In" Type="Decimal" />
+            <Parameter Name="Priority" Mode="In" Type="String" />
+            <Parameter Name="FK_DependentOn" Mode="In" Type="Int32" />
+            <Parameter Name="IsDependent" Mode="In" Type="Boolean" />
+            <Parameter Name="FK_ProjectOwner" Mode="In" Type="Int32" />
+            <Parameter Name="FK_CuurentlyAssignTo" Mode="In" Type="Int32" />
+            <Parameter Name="CompletedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="MCreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="MCreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="MModifiedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="MModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="MIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="ExceptionMessage" Mode="InOut" Type="String" />
+            <Parameter Name="ValidateMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_AddTask">
+            <Parameter Name="FK_Project" Mode="In" Type="Int32" />
+            <Parameter Name="FK_Milestone" Mode="In" Type="Int32" />
+            <Parameter Name="TaskName" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="UploadAttachement" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Budget" Mode="In" Type="Decimal" />
+            <Parameter Name="Progress" Mode="In" Type="Decimal" />
+            <Parameter Name="Priority" Mode="In" Type="String" />
+            <Parameter Name="Longitude" Mode="In" Type="Decimal" />
+            <Parameter Name="Latitude" Mode="In" Type="Decimal" />
+            <Parameter Name="Radius" Mode="In" Type="Decimal" />
+            <Parameter Name="FK_DependentOn" Mode="In" Type="Int32" />
+            <Parameter Name="IsDependent" Mode="In" Type="Boolean" />
+            <Parameter Name="FK_ProjectOwner" Mode="In" Type="Int32" />
+            <Parameter Name="FK_CuurentlyAssignTo" Mode="In" Type="Int32" />
+            <Parameter Name="CompletedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="TCreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="TCreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="TModifiedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="TModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="TIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="ExceptionMessage" Mode="InOut" Type="String" />
+            <Parameter Name="ValidateMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_EditActivity">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="ActivityName" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="UploadAttachement" Mode="In" Type="String" />
+            <Parameter Name="Longitude" Mode="In" Type="Decimal" />
+            <Parameter Name="Latitude" Mode="In" Type="Decimal" />
+            <Parameter Name="FK_Task" Mode="In" Type="Int32" />
+            <Parameter Name="FK_Project" Mode="In" Type="Int32" />
+            <Parameter Name="FK_Milestone" Mode="In" Type="Int32" />
+            <Parameter Name="FK_MilestoneOwner" Mode="In" Type="Int32" />
+            <Parameter Name="FK_ProjectOwner" Mode="In" Type="Int32" />
+            <Parameter Name="FK_CuurentlyAssignTo" Mode="In" Type="Int32" />
+            <Parameter Name="CompletedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="ACreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="ACreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="AModifiedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="AModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="AIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="ExceptionMessage" Mode="InOut" Type="String" />
+            <Parameter Name="ValidateMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_EditMilestone">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="FK_Project" Mode="In" Type="Int32" />
+            <Parameter Name="MilestoneName" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="UploadAttachement" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Budget" Mode="In" Type="Decimal" />
+            <Parameter Name="Progress" Mode="In" Type="Decimal" />
+            <Parameter Name="Priority" Mode="In" Type="String" />
+            <Parameter Name="FK_DependentOn" Mode="In" Type="Int32" />
+            <Parameter Name="IsDependent" Mode="In" Type="Boolean" />
+            <Parameter Name="FK_ProjectOwner" Mode="In" Type="Int32" />
+            <Parameter Name="FK_CuurentlyAssignTo" Mode="In" Type="Int32" />
+            <Parameter Name="CompletedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="MCreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="MCreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="MModifiedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="MModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="MIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="ExceptionMessage" Mode="InOut" Type="String" />
+            <Parameter Name="ValidateMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_EditTask">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="FK_Project" Mode="In" Type="Int32" />
+            <Parameter Name="FK_Milestone" Mode="In" Type="Int32" />
+            <Parameter Name="TaskName" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="UploadAttachement" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Status" Mode="In" Type="String" />
+            <Parameter Name="Budget" Mode="In" Type="Decimal" />
+            <Parameter Name="Progress" Mode="In" Type="Decimal" />
+            <Parameter Name="Priority" Mode="In" Type="String" />
+            <Parameter Name="Longitude" Mode="In" Type="Decimal" />
+            <Parameter Name="Latitude" Mode="In" Type="Decimal" />
+            <Parameter Name="Radius" Mode="In" Type="Decimal" />
+            <Parameter Name="FK_DependentOn" Mode="In" Type="Int32" />
+            <Parameter Name="IsDependent" Mode="In" Type="Boolean" />
+            <Parameter Name="FK_ProjectOwner" Mode="In" Type="Int32" />
+            <Parameter Name="FK_CuurentlyAssignTo" Mode="In" Type="Int32" />
+            <Parameter Name="CompletedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="TCreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="TCreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="TModifiedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="TModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="TIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="ExceptionMessage" Mode="InOut" Type="String" />
+            <Parameter Name="ValidateMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(PMTModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(PMTModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Activities" EntityType="PMTModel.Activity" />
+          <EntitySet Name="Attachments" EntityType="PMTModel.Attachment" />
+          <EntitySet Name="Employee365" EntityType="PMTModel.Employee365" />
+          <EntitySet Name="MileStones" EntityType="PMTModel.MileStone" />
+          <EntitySet Name="MilestoneAssignedToes" EntityType="PMTModel.MilestoneAssignedTo" />
+          <EntitySet Name="Priorities" EntityType="PMTModel.Priority" />
+          <EntitySet Name="Projects" EntityType="PMTModel.Project" />
+          <EntitySet Name="ProjectMembers" EntityType="PMTModel.ProjectMember" />
+          <EntitySet Name="Status" EntityType="PMTModel.Status" />
+          <EntitySet Name="sysdiagrams" EntityType="PMTModel.sysdiagram" />
+          <EntitySet Name="Tasks" EntityType="PMTModel.Task" />
+          <AssociationSet Name="FK_Activity_Task" Association="PMTModel.FK_Activity_Task">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Activity" EntitySet="Activities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MileStone_Project" Association="PMTModel.FK_MileStone_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="MileStone" EntitySet="MileStones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MilestoneAssignedTo_MileStone" Association="PMTModel.FK_MilestoneAssignedTo_MileStone">
+            <End Role="MileStone" EntitySet="MileStones" />
+            <End Role="MilestoneAssignedTo" EntitySet="MilestoneAssignedToes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Task_MileStone" Association="PMTModel.FK_Task_MileStone">
+            <End Role="MileStone" EntitySet="MileStones" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProjectMember_Project" Association="PMTModel.FK_ProjectMember_Project">
+            <End Role="Project" EntitySet="Projects" />
+            <End Role="ProjectMember" EntitySet="ProjectMembers" />
+          </AssociationSet>
+          <FunctionImport Name="AddProjectMember">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="FK_Project" Mode="In" Type="Int32" />
+            <Parameter Name="FK_Employee365ID" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="PCreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="PModifiedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="PModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="PIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="ExceptionMessage" Mode="InOut" Type="String" />
+            <Parameter Name="ValidateMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddAttachment">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Path" Mode="In" Type="String" />
+            <Parameter Name="extention" Mode="In" Type="String" />
+            <Parameter Name="ProId" Mode="In" Type="Int32" />
+            <Parameter Name="CreatedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="PCreatedBy" Mode="In" Type="Int32" />
+            <Parameter Name="PModifiedOn" Mode="In" Type="DateTime" />
+            <Parameter Name="PModifiedBy" Mode="In" Type="Int32" />
+            <Parameter Name="PIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="ExceptionMessage" Mode="InOut" Type="String" />
+            <Parameter Name="ValidateMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Task" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectOwner" Type="Int32" />
+          <Property Name="ActualCost" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FK_Project" Type="Int32" />
+          <Property Name="FK_Milestone" Type="Int32" />
+          <Property Name="FK_MilestoneOwner" Type="Int32" />
+          <Property Name="CompletedBy" Type="Int32" />
+          <Property Name="CompletedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Longitude" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Latitude" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FK_ProjectOwner" Type="Int32" />
+          <NavigationProperty Name="Task" Relationship="PMTModel.FK_Activity_Task" FromRole="Activity" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Attachment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FileType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="extention" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FK_Project" Type="Int32" />
+          <Property Name="FK_Milestone" Type="Int32" />
+          <Property Name="FK_Task" Type="Int32" />
+          <Property Name="Fk_Activity" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Employee365">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Designation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CellNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="MileStone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FK_Project" Type="Int32" Nullable="false" />
+          <Property Name="FK_DependentOn" Type="Int32" />
+          <Property Name="FK_ProjectOwner" Type="Int32" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Budget" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Progress" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Priority" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsDependent" Type="Boolean" Nullable="false" />
+          <Property Name="CurrentlyAssignedTo" Type="Int32" Nullable="false" />
+          <Property Name="CompletedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Project" Relationship="PMTModel.FK_MileStone_Project" FromRole="MileStone" ToRole="Project" />
+          <NavigationProperty Name="MilestoneAssignedToes" Relationship="PMTModel.FK_MilestoneAssignedTo_MileStone" FromRole="MileStone" ToRole="MilestoneAssignedTo" />
+          <NavigationProperty Name="Tasks" Relationship="PMTModel.FK_Task_MileStone" FromRole="MileStone" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="MilestoneAssignedTo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FK_MileStone" Type="Int32" />
+          <Property Name="FK_AssignedTo" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="MileStone" Relationship="PMTModel.FK_MilestoneAssignedTo_MileStone" FromRole="MilestoneAssignedTo" ToRole="MileStone" />
+        </EntityType>
+        <EntityType Name="Priority">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FK_ProjectOwner" Type="Int32" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Budget" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Progress" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Priority" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompletedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="UploadAttachement" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MileStones" Relationship="PMTModel.FK_MileStone_Project" FromRole="Project" ToRole="MileStone" />
+          <NavigationProperty Name="ProjectMembers" Relationship="PMTModel.FK_ProjectMember_Project" FromRole="Project" ToRole="ProjectMember" />
+        </EntityType>
+        <EntityType Name="ProjectMember">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FK_Project" Type="Int32" />
+          <Property Name="FK_Employee365ID" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Project" Relationship="PMTModel.FK_ProjectMember_Project" FromRole="ProjectMember" ToRole="Project" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ProjectOwner" Type="Int32" />
+          <Property Name="Budget" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Progress" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Priority" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FK_Project" Type="Int32" />
+          <Property Name="FK_MileStone" Type="Int32" />
+          <Property Name="FK_MilestoneOwner" Type="Int32" />
+          <Property Name="FK_AssignTo" Type="Int32" />
+          <Property Name="IsDependentTask" Type="Boolean" Nullable="false" />
+          <Property Name="FK_DependentTask" Type="Int32" />
+          <Property Name="FK_ProjectOwner" Type="Int32" />
+          <Property Name="CompletedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsLocationRequired" Type="Boolean" />
+          <Property Name="Longitude" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Latitude" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Radius" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Activities" Relationship="PMTModel.FK_Activity_Task" FromRole="Task" ToRole="Activity" />
+          <NavigationProperty Name="MileStone" Relationship="PMTModel.FK_Task_MileStone" FromRole="Task" ToRole="MileStone" />
+        </EntityType>
+        <Association Name="FK_Activity_Task">
+          <End Type="PMTModel.Task" Role="Task" Multiplicity="1" />
+          <End Type="PMTModel.Activity" Role="Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="FK_Task" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MileStone_Project">
+          <End Type="PMTModel.Project" Role="Project" Multiplicity="1" />
+          <End Type="PMTModel.MileStone" Role="MileStone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MileStone">
+              <PropertyRef Name="FK_Project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MilestoneAssignedTo_MileStone">
+          <End Type="PMTModel.MileStone" Role="MileStone" Multiplicity="0..1" />
+          <End Type="PMTModel.MilestoneAssignedTo" Role="MilestoneAssignedTo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MileStone">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MilestoneAssignedTo">
+              <PropertyRef Name="FK_MileStone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Task_MileStone">
+          <End Type="PMTModel.MileStone" Role="MileStone" Multiplicity="0..1" />
+          <End Type="PMTModel.Task" Role="Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MileStone">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="FK_MileStone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProjectMember_Project">
+          <End Type="PMTModel.Project" Role="Project" Multiplicity="0..1" />
+          <End Type="PMTModel.ProjectMember" Role="ProjectMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Project">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProjectMember">
+              <PropertyRef Name="FK_Project" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PMTModelStoreContainer" CdmEntityContainer="PMTEntities2">
+          <FunctionImportMapping FunctionImportName="SP_AddProject" FunctionName="PMTModel.Store.SP_AddProject" />
+          <FunctionImportMapping FunctionImportName="SP_EditProject" FunctionName="PMTModel.Store.SP_EditProject" />
+          <FunctionImportMapping FunctionImportName="SP_AddActivity" FunctionName="PMTModel.Store.SP_AddActivity" />
+          <FunctionImportMapping FunctionImportName="SP_AddMilestone" FunctionName="PMTModel.Store.SP_AddMilestone" />
+          <FunctionImportMapping FunctionImportName="SP_AddTask" FunctionName="PMTModel.Store.SP_AddTask" />
+          <FunctionImportMapping FunctionImportName="SP_EditActivity" FunctionName="PMTModel.Store.SP_EditActivity" />
+          <FunctionImportMapping FunctionImportName="SP_EditMilestone" FunctionName="PMTModel.Store.SP_EditMilestone" />
+          <FunctionImportMapping FunctionImportName="SP_EditTask" FunctionName="PMTModel.Store.SP_EditTask" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="PMTModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="PMTModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="PMTModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="PMTModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PMTModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="PMTModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PMTModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="PMTModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="PMTModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Activities">
+            <EntityTypeMapping TypeName="PMTModel.Activity">
+              <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="FK_ProjectOwner" ColumnName="FK_ProjectOwner" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
+                <ScalarProperty Name="CompletedBy" ColumnName="CompletedBy" />
+                <ScalarProperty Name="FK_MilestoneOwner" ColumnName="FK_MilestoneOwner" />
+                <ScalarProperty Name="FK_Milestone" ColumnName="FK_Milestone" />
+                <ScalarProperty Name="FK_Project" ColumnName="FK_Project" />
+                <ScalarProperty Name="ActualCost" ColumnName="ActualCost" />
+                <ScalarProperty Name="ProjectOwner" ColumnName="ProjectOwner" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FK_Task" ColumnName="FK_Task" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="PMTModel.Attachment">
+              <MappingFragment StoreEntitySet="Attachment">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Fk_Activity" ColumnName="Fk_Activity" />
+                <ScalarProperty Name="FK_Task" ColumnName="FK_Task" />
+                <ScalarProperty Name="FK_Milestone" ColumnName="FK_Milestone" />
+                <ScalarProperty Name="FK_Project" ColumnName="FK_Project" />
+                <ScalarProperty Name="extention" ColumnName="extention" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee365">
+            <EntityTypeMapping TypeName="PMTModel.Employee365">
+              <MappingFragment StoreEntitySet="Employee365">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CellNo" ColumnName="CellNo" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MileStones">
+            <EntityTypeMapping TypeName="PMTModel.MileStone">
+              <MappingFragment StoreEntitySet="MileStone">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
+                <ScalarProperty Name="CurrentlyAssignedTo" ColumnName="CurrentlyAssignedTo" />
+                <ScalarProperty Name="IsDependent" ColumnName="IsDependent" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Progress" ColumnName="Progress" />
+                <ScalarProperty Name="Budget" ColumnName="Budget" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FK_ProjectOwner" ColumnName="FK_ProjectOwner" />
+                <ScalarProperty Name="FK_DependentOn" ColumnName="FK_DependentOn" />
+                <ScalarProperty Name="FK_Project" ColumnName="FK_Project" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MilestoneAssignedToes">
+            <EntityTypeMapping TypeName="PMTModel.MilestoneAssignedTo">
+              <MappingFragment StoreEntitySet="MilestoneAssignedTo">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="FK_AssignedTo" ColumnName="FK_AssignedTo" />
+                <ScalarProperty Name="FK_MileStone" ColumnName="FK_MileStone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Priorities">
+            <EntityTypeMapping TypeName="PMTModel.Priority">
+              <MappingFragment StoreEntitySet="Priority">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="PMTModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="UploadAttachement" ColumnName="UploadAttachement" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Progress" ColumnName="Progress" />
+                <ScalarProperty Name="Budget" ColumnName="Budget" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="FK_ProjectOwner" ColumnName="FK_ProjectOwner" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectMembers">
+            <EntityTypeMapping TypeName="PMTModel.ProjectMember">
+              <MappingFragment StoreEntitySet="ProjectMember">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="FK_Employee365ID" ColumnName="FK_Employee365ID" />
+                <ScalarProperty Name="FK_Project" ColumnName="FK_Project" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="PMTModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PMTModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="PMTModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="Radius" ColumnName="Radius" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="IsLocationRequired" ColumnName="IsLocationRequired" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
+                <ScalarProperty Name="FK_ProjectOwner" ColumnName="FK_ProjectOwner" />
+                <ScalarProperty Name="FK_DependentTask" ColumnName="FK_DependentTask" />
+                <ScalarProperty Name="IsDependentTask" ColumnName="IsDependentTask" />
+                <ScalarProperty Name="FK_AssignTo" ColumnName="FK_AssignTo" />
+                <ScalarProperty Name="FK_MilestoneOwner" ColumnName="FK_MilestoneOwner" />
+                <ScalarProperty Name="FK_MileStone" ColumnName="FK_MileStone" />
+                <ScalarProperty Name="FK_Project" ColumnName="FK_Project" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="Progress" ColumnName="Progress" />
+                <ScalarProperty Name="Budget" ColumnName="Budget" />
+                <ScalarProperty Name="ProjectOwner" ColumnName="ProjectOwner" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddProjectMember" FunctionName="PMTModel.Store.AddProjectMember" />
+          <FunctionImportMapping FunctionImportName="AddAttachment" FunctionName="PMTModel.Store.AddAttachment" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,162 @@
+﻿@model PMTool.EntityModel.MileStone
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <div class="page-header">
+                        <div class="page-title">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 p-l-0 title-margin-left">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Project</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <section id="main-content">
+                <div>
+                    <h4>MileStone Detail</h4>
+                    <div class="row">
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })&nbsp;
+                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+
+                    </div>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.StartDate)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.StartDate)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.EndDate)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.EndDate)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Status)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Budget)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Budget)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Progress)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Progress)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Priority)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Priority)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FK_DependentOn)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FK_DependentOn)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.IsDependent)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.IsDependent)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CurrentlyAssignedTo)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CurrentlyAssignedTo)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FK_ProjectOwner)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FK_ProjectOwner)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Project.Name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Project.Name)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.IsActive)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.IsActive)
+                        </dd>
+
+
+
+                    </dl>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+

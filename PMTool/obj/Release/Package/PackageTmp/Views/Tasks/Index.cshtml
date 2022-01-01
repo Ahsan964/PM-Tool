@@ -1,0 +1,94 @@
+﻿@model IEnumerable<PMTool.EntityModel.Task>
+
+@{
+    int rowNo = 1;
+}
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <div class="page-header">
+                        <div class="page-title">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 p-l-0 title-margin-left">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="@Url.Action("Index","Home")">Dashboard</a></li>
+                                <li class="breadcrumb-item active"><a href="@Url.Action("Index","Projects")"> Task</a></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <h4> Task List</h4>
+                @Html.ActionLink("Create", "Create", null, new { @class = "btn btn-primary" })
+                <div class="grid">
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>S#</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Budget</th>
+                                    <th>Progress</th>
+                                    <th>Action</th>
+                                    <th>Action</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td scope="row">@rowNo</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                 
+                                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                
+                                        <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Budget)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.Progress)</td>
+
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new
+                                       {
+                                           @class = "badge badge-primary"
+                                       })
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Details", "Details", new { id = item.Id }, new
+                                       {
+                                           @class = "badge badge-info"
+                                       })
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new
+                                       {
+                                           @class = "badge badge-danger"
+                                       })
+                                        </td>
+                                    </tr>
+                                    rowNo = rowNo + 1;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

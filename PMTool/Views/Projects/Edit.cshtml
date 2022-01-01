@@ -1,0 +1,263 @@
+﻿@model PMTool.EntityModel.Project
+@using PMTool.EntityModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-r-0 title-margin-right">
+                    <div class="page-header">
+                        <div class="page-title">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 p-l-0 title-margin-left">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                                <li class="breadcrumb-item active">Project</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <section id="main-content">
+                <h4>Edit Project</h4>
+                <div>
+                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-info" })
+                </div>
+                @using (Html.BeginForm("Edit", "Projects", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.UploadAttachement, "Upload Attachement", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.UploadAttachement, new { htmlAttributes = new { @class = "form-control", @type = "file" } })
+                                @Html.ValidationMessageFor(model => model.UploadAttachement, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+
+                    <label class="control-label col-md-2">Upload Attachment</label>
+                    <div class="col-md-10">
+                        <input type="file" name="attach-file" id="attach-file" required />
+                    </div>
+                </div>*@
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10 editor-field">
+                                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Status, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Status", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                    @Html.LabelFor(model => model.Attachment, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Attachment, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Attachment, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Budget, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Budget, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Budget, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Progress, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Progress, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Progress, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Priority, "Priority", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Priority", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FK_ProjectOwner, "FK_ProjectOwner", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("FK_ProjectOwner", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AssignedEmployee, "Assigned Employee", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @*@Html.DropDownList("employee365s", null, htmlAttributes: new { @class = "form-control chosen-select", @multiple = true })*@
+
+                                <select class="form-control chosen-select" id="employee365s" multiple="True" name="employee365s">
+
+                                    @foreach (var item in ViewBag.employee365s.Items)
+                                    {
+                                        if (((List<ProjectMember>)ViewBag.employees).Any(x => x.Id == item.Id))
+                                        {
+                                            <option selected="selected" value=@item.Id>@item.Name</option>
+                                        }
+                                        else
+                                        {
+                                            <option value=@item.Id>@item.Name</option>
+                                        }
+
+                                    }
+                                </select>
+
+                                @Html.ValidationMessageFor(model => model.AssignedEmployee, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                    @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.IsActive)
+                            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>*@
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.EditorFor(model => model.IsActive)
+                                    @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.files, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <div class="checkbox">
+                                    @Html.TextBoxFor(model => model.files, "", new { @type = "file", @multiple = "multiple" })
+
+                                    @Html.ValidationMessageFor(model => model.files, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <ul class="attachment">
+                            @foreach (var item in Model.ProductPictureList)
+                            {
+                                <li>
+                                    @* <a class="title" href="/Support/Download/?p=@(item.Id + item.Extension)&d=@item.FileName">@item.FileName</a>*@
+                                    @item.Name
+                                    <a href="javascript:void(0);" data-id="@item.Id" class="deleteItem">X</a>
+                                </li>
+
+                            }
+                        </ul>
+
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Save" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+            </section>
+        </div>
+    </div>
+</div>
+
+
+<script src="@Url.Content("~/Content/assets/js/lib/jquery.min.js")"></script>
+<script src="~/Scripts/chosen.jquery.js"></script>
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+<script>
+
+        $('.chosen-select').chosen();
+
+
+    $('.deleteItem').click(function (e) {
+           e.preventDefault();
+           var $ctrl = $(this);
+           if (confirm('Do you really want to delete this file?')) {
+               $.ajax({
+                   url: '@Url.Action("DeleteFile")',
+                   type: 'POST',
+                   data: { id: $(this).data('id') }
+               }).done(function (data) {
+                   if (data.Result == "OK") {
+                       $ctrl.closest('li').remove();
+                   }
+                   else if (data.Result.Message) {
+                       alert(data.Result.Message);
+                   }
+               }).fail(function () {
+                   alert("There is something wrong. Please try again.");
+               })
+
+           }
+    });
+
+
+</script>

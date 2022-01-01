@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PMTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="PMTEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Activities" EntityType="PMTModel.Activity" />
+    <EntitySet Name="Attachments" EntityType="PMTModel.Attachment" />
+    <EntitySet Name="Employee365" EntityType="PMTModel.Employee365" />
+    <EntitySet Name="MileStones" EntityType="PMTModel.MileStone" />
+    <EntitySet Name="MilestoneAssignedToes" EntityType="PMTModel.MilestoneAssignedTo" />
+    <EntitySet Name="Priorities" EntityType="PMTModel.Priority" />
+    <EntitySet Name="Projects" EntityType="PMTModel.Project" />
+    <EntitySet Name="ProjectMembers" EntityType="PMTModel.ProjectMember" />
+    <EntitySet Name="Status" EntityType="PMTModel.Status" />
+    <EntitySet Name="sysdiagrams" EntityType="PMTModel.sysdiagram" />
+    <EntitySet Name="Tasks" EntityType="PMTModel.Task" />
+    <AssociationSet Name="FK_Activity_Task" Association="PMTModel.FK_Activity_Task">
+      <End Role="Task" EntitySet="Tasks" />
+      <End Role="Activity" EntitySet="Activities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MileStone_Project" Association="PMTModel.FK_MileStone_Project">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="MileStone" EntitySet="MileStones" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MilestoneAssignedTo_MileStone" Association="PMTModel.FK_MilestoneAssignedTo_MileStone">
+      <End Role="MileStone" EntitySet="MileStones" />
+      <End Role="MilestoneAssignedTo" EntitySet="MilestoneAssignedToes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Task_MileStone" Association="PMTModel.FK_Task_MileStone">
+      <End Role="MileStone" EntitySet="MileStones" />
+      <End Role="Task" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProjectMember_Project" Association="PMTModel.FK_ProjectMember_Project">
+      <End Role="Project" EntitySet="Projects" />
+      <End Role="ProjectMember" EntitySet="ProjectMembers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Activity">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_Task" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProjectOwner" Type="Int32" />
+    <Property Name="ActualCost" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="FK_Project" Type="Int32" />
+    <Property Name="FK_Milestone" Type="Int32" />
+    <Property Name="FK_MilestoneOwner" Type="Int32" />
+    <Property Name="CompletedBy" Type="Int32" />
+    <Property Name="CompletedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="Longitude" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Latitude" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="FK_ProjectOwner" Type="Int32" />
+    <NavigationProperty Name="Task" Relationship="PMTModel.FK_Activity_Task" FromRole="Activity" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="Attachment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FileType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Path" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="extention" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FK_Project" Type="Int32" />
+    <Property Name="FK_Milestone" Type="Int32" />
+    <Property Name="FK_Task" Type="Int32" />
+    <Property Name="Fk_Activity" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Employee365">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Department" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Designation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="CellNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="MileStone">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FK_Project" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Budget" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Progress" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Priority" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FK_DependentOn" Type="Int32" />
+    <Property Name="IsDependent" Type="Boolean" />
+    <Property Name="CurrentlyAssignedTo" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CompletedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="FK_ProjectOwner" Type="Int32" />
+    <NavigationProperty Name="Project" Relationship="PMTModel.FK_MileStone_Project" FromRole="MileStone" ToRole="Project" />
+    <NavigationProperty Name="MilestoneAssignedToes" Relationship="PMTModel.FK_MilestoneAssignedTo_MileStone" FromRole="MileStone" ToRole="MilestoneAssignedTo" />
+    <NavigationProperty Name="Tasks" Relationship="PMTModel.FK_Task_MileStone" FromRole="MileStone" ToRole="Task" />
+  </EntityType>
+  <EntityType Name="MilestoneAssignedTo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FK_MileStone" Type="Int32" />
+    <Property Name="FK_AssignedTo" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="MileStone" Relationship="PMTModel.FK_MilestoneAssignedTo_MileStone" FromRole="MilestoneAssignedTo" ToRole="MileStone" />
+  </EntityType>
+  <EntityType Name="Priority">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FK_ProjectOwner" Type="Int32" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Budget" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Progress" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Priority" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CompletedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="MileStones" Relationship="PMTModel.FK_MileStone_Project" FromRole="Project" ToRole="MileStone" />
+    <NavigationProperty Name="ProjectMembers" Relationship="PMTModel.FK_ProjectMember_Project" FromRole="Project" ToRole="ProjectMember" />
+  </EntityType>
+  <EntityType Name="ProjectMember">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FK_Project" Type="Int32" />
+    <Property Name="FK_Employee365ID" Type="Int32" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Project" Relationship="PMTModel.FK_ProjectMember_Project" FromRole="ProjectMember" ToRole="Project" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ProjectOwner" Type="Int32" />
+    <Property Name="Budget" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Progress" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Priority" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FK_Project" Type="Int32" />
+    <Property Name="FK_MileStone" Type="Int32" />
+    <Property Name="FK_MilestoneOwner" Type="Int32" />
+    <Property Name="FK_AssignTo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsDependentTask" Type="Boolean" />
+    <Property Name="FK_DependentTask" Type="Int32" />
+    <Property Name="FK_ProjectOwner" Type="Int32" />
+    <Property Name="CompletedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedOn" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedBy" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsLocationRequired" Type="Boolean" />
+    <Property Name="Longitude" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Latitude" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Radius" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IsApproved" Type="Boolean" />
+    <Property Name="ApprovedBy" Type="Int32" />
+    <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Activities" Relationship="PMTModel.FK_Activity_Task" FromRole="Task" ToRole="Activity" />
+    <NavigationProperty Name="MileStone" Relationship="PMTModel.FK_Task_MileStone" FromRole="Task" ToRole="MileStone" />
+  </EntityType>
+  <Association Name="FK_Activity_Task">
+    <End Type="PMTModel.Task" Role="Task" Multiplicity="1" />
+    <End Type="PMTModel.Activity" Role="Activity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activity">
+        <PropertyRef Name="FK_Task" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MileStone_Project">
+    <End Type="PMTModel.Project" Role="Project" Multiplicity="1" />
+    <End Type="PMTModel.MileStone" Role="MileStone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MileStone">
+        <PropertyRef Name="FK_Project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MilestoneAssignedTo_MileStone">
+    <End Type="PMTModel.MileStone" Role="MileStone" Multiplicity="0..1" />
+    <End Type="PMTModel.MilestoneAssignedTo" Role="MilestoneAssignedTo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MileStone">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MilestoneAssignedTo">
+        <PropertyRef Name="FK_MileStone" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Task_MileStone">
+    <End Type="PMTModel.MileStone" Role="MileStone" Multiplicity="0..1" />
+    <End Type="PMTModel.Task" Role="Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MileStone">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Task">
+        <PropertyRef Name="FK_MileStone" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProjectMember_Project">
+    <End Type="PMTModel.Project" Role="Project" Multiplicity="0..1" />
+    <End Type="PMTModel.ProjectMember" Role="ProjectMember" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Project">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProjectMember">
+        <PropertyRef Name="FK_Project" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
